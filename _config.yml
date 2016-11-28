@@ -13,11 +13,12 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: P1xt-Notes
+title: P1xt-RedPanda
 description: > # this means to ignore newlines until "baseurl:"
   Notes, snippets, musings, whatever I come across while working with the Red Panda Cohort.
+  Repository - https://github.com/P1xt/p1xt-redpanda
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://p1xt-redpanda.surge.sh/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: P1xt
 github_username:  P1xt
 

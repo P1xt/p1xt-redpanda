@@ -4,3 +4,6 @@
 
 
 Jekyll blog, served on Surge.sh, deployment via Travis CI
+
+
+Blog location: https://github.com/P1xt/p1xt-redpanda
