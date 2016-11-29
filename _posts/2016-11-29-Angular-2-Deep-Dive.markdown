@@ -2,7 +2,7 @@
 layout: post
 title:  "Angular 2 - Deep dive"
 date:   2016-11-29 06:00:17 -0600
-categories: FCC Backend
+categories: Angular2 SPA
 ---
 
 I already have a rudimentary understanding of Angular 2. However,
