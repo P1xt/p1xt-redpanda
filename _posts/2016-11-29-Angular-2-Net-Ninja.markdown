@@ -23,7 +23,7 @@ html, css, typescript and test(spec) files.
 ### Setup
 
 * first install node (I already had it installed, I'm running version 
-7.20.0)
+7.2.0)
 * `npm install -g angular-cli`
 * Note: the Ninja said to setup the project wit `ng new projectname` but
 I'd already created a git repo for it so I just cd'd into that and ran
