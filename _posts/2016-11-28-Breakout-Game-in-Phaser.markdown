@@ -14,4 +14,6 @@ for the GameDev December Challenge.
 * [GameDev December Challenge](https://forum.freecodecamp.com/t/computer-gamedev-december-challenge-ends-december-31st/59069)
 * [Phaser.io](http://phaser.io/)
 
+## On hold until I finish Angular 2 deep dive
+
 

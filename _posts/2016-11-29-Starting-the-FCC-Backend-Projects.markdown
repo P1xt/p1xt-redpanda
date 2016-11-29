@@ -13,4 +13,4 @@ I'll update this with resources and links as I progress:
 
 
 
-
+## On hold until I finish Angular 2 deep dive
