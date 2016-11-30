@@ -7,12 +7,26 @@ categories: Angular2 SPA
 
 #### The following are my notes from when I watched The Net Ninja's Angular 2 Playlist on Youtube.
 
-Component based! Navbar is a component, Sidebar too, everything :)
-Tutorial is in TypeScript. Demo app created is Angular 2 (TypeScript)
-with a Firebase backend.
+Component based! Navbar is a component, Sidebar too, everything. The 
+application starts with a root component, which contains other
+components, which in turn contain other components. So, for instance, 
+the root component could contain sidebar, navigation, blog and footer 
+components, each of which may, themselves, contain other components.
 
-Each component a modular unit of the overall application. It has it's own
-html, css, typescript and test(spec) files.
+![Component Structure]({{ site.url }}/assets/component-graphic.png)
+
+
+Each component is a modular unit of the overall application. It has it's own
+html(view), css(styles), typescript(logic) and test(spec) files. It can
+be imported into other components and then it's selector may be included
+in that component's html in order to render it. You may include additional
+ content within the selector and then have that additional content
+ rendered wherever you like by using the `<ng-content>` directive to
+ indicate where the content should be rendered within the component's
+ html.
+
+The tutorial is in TypeScript. The demo app created is Angular 2 (TypeScript)
+with a Firebase backend.
 
 #### Editor in use is Atom with the following plugins:
 
@@ -40,6 +54,11 @@ made the videos, now you just get assets, e2e, node_modules, and src
 folders. And, you don't even get the dist folder until you do a
 build. so **don't panic** angular-cli just cleaned up a bunch of
 the boilerplate so there's less of it for you to worry about
+
+**Note:** to make a css file that will affect the entire site, put it
+in the src folder right next to the main index.html. The Ninja says to
+put it in the public folder but angular-cli doesn't have that folder
+any more. The src folder works.
 
 * dist folder - this is what gets deployed (auto-generated)
 * e2e folder - ts config and end to end tests
@@ -75,6 +94,58 @@ class Car {
 }
 myCar:Car = new Car(70)
 ```
+
+#### Basic example of a component
+
+``` typescript
+import { Component } from '@angular/core';
+
+@Component({ // component decorator decorates the class that follows
+    moduleId: module.id,  // use moduleId if you want relative urls
+    selector: 'app-root', // html tag where this component is bound
+    templateUrl: 'app.component.html', // relative url
+    styleUrls: ['app.component.css']   // relative url
+})
+export class AppComponent { // decorated by @Component
+    title = 'app works!';   // proporties this comoponent can use
+}
+```
+
+#### ng commands
+
+* **`ng generate component <name>`** - creates a new component with the name
+`<name>`. Note, run this command from within the src/app directory to
+ensure that the new component is created within app.
+
+### Terminology
+
+* **Component** - modular unit of the interface, composed of typescript,
+html, css, and tests and may (optionally) contain other component.
+* **Decorator** - Decorates a class (starts with @ and gives more information
+about a class).
+* **Import** - used to pull in resources from another file.
+* **Template** - html file containing the structure of a component, included
+via the **templateUrl** property of the object passed in the Component
+decorator OR html directly included in the **template** property of the
+object passed in the Component decorator.
+* **OnInit** - imported from Angular/Core to make available processing
+when a component is initialized.
+* **Nested Component** - Component that should be rendered inside another
+component. You MUST import it in the component you want to nest it
+inside. You must also add it to the "directives" property of the main
+component's decorator object. (note, the Ninja says to import index, but
+the new cli will create for instance home.component.ts if you create
+a component named home so you should use home.component, not index).
+* **ng-content directive** - allows you to include some content inside
+a nested component that is entered into the main component. Include the
+content inside the nested component's tags in the main component's html,
+and then use the `<ng-content>` tag within the html for the nested
+component to pinpoint where that content should be placed.
+* **data binding** - use
+    * string interpolation (double curly braces)
+    * property binding (`<input [required]='expression'>`)
+    * event binding (`<button(click)='expression/function'>`)
+    * two way data binding (`<input [(ngModel)]="model/object">`)
 
 ### Study materials
 
