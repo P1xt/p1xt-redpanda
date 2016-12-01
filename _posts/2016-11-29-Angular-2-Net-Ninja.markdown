@@ -55,17 +55,35 @@ folders. And, you don't even get the dist folder until you do a
 build. so **don't panic** angular-cli just cleaned up a bunch of
 the boilerplate so there's less of it for you to worry about
 
-**Note:** to make a css file that will affect the entire site, put it
-in the src folder right next to the main index.html. The Ninja says to
-put it in the public folder but angular-cli doesn't have that folder
-any more. The src folder works.
-
 * dist folder - this is what gets deployed (auto-generated)
 * e2e folder - ts config and end to end tests
 * node_modules folder - auto-generated
 * src folder - this is where all our awesome code goes
 * various .json files - setup/config
 * *.conf.js - for configuring testing
+
+### Gotchas
+
+**Note:** to make a css file that will affect the entire site, put it
+in the src folder right next to the main index.html. The Ninja says to
+put it in the public folder but angular-cli doesn't have that folder
+any more. The src folder works.
+
+**Note:** - The Ninja has us create a directives property on the
+ Component Annotation object, this has been deprecated, now you set
+ this up in the module.ts file using "declarations" instead of
+ "directives". [example from TOH](https://angular.io/docs/ts/latest/tutorial/toh-pt3.html)
+
+**Note:** - When the Ninja tells you to use the map function to map the
+ data you get from `this.http.get()` to json you must ALSO add this to
+ your includes `import 'rxjs/Rx';` or your console will fill up with
+ errors, because without rxjs, the data you get from a http.get can't be
+ manipulated with map.
+
+**Note:** - When the Ninja tells you to use `HTTP_PROVIDERS` use
+`HttpModule` instead, it changed between the filming of the videos
+and the final release.
+
 
 ### TypeScript quick start
 
@@ -116,13 +134,16 @@ export class AppComponent { // decorated by @Component
 * **`ng generate component <name>`** - creates a new component with the name
 `<name>`. Note, run this command from within the src/app directory to
 ensure that the new component is created within app.
+* **`ng generate pipe <name>`**- creates a new pipe with the name `<name>`
+* **`ng generate service <name>`**- creates a new service with the name `<name>`
+
 
 ### Terminology
 
 * **Component** - modular unit of the interface, composed of typescript,
 html, css, and tests and may (optionally) contain other component.
-* **Decorator** - Decorates a class (starts with @ and gives more information
-about a class).
+* **Decorator** - (called Annotation in official Angular 2 docs)
+Decorates a class (starts with @ and gives more information about a class).
 * **Import** - used to pull in resources from another file.
 * **Template** - html file containing the structure of a component, included
 via the **templateUrl** property of the object passed in the Component
@@ -143,11 +164,74 @@ and then use the `<ng-content>` tag within the html for the nested
 component to pinpoint where that content should be placed.
 * **data binding** - use
     * string interpolation (double curly braces)
-    * property binding (`<input [required]='expression'>`)
+    * property binding (`<input [required]='expression'>`) can bind to
+    native html properties, built in angular directives, or
+    custom made properties.
     * event binding (`<button(click)='expression/function'>`)
     * two way data binding (`<input [(ngModel)]="model/object">`)
+* **routing** - mechanism by which angular knows which component to load
+based on which url is browsed to (/home, /, /user, etc). Implemented by 
+creating a routes file and exporting routes so they can be loaded in 
+main.ts. Tells angular which component to load for each route and where
+to load them. **Important note** The ng2 router has changed a lot since
+the Ninja made his playlist. ROUTER_DIRECTIVIES wouldn't import so I
+used RouterOutlet instead.
+* **[ngClass]** - (attribute directive) - binds to an object like
+ `<p [ngClass]="{'blue': true, 'red': false, 'underline': true}">`
+ The object may be created in the component and used like
+ `[ngClass]="classes"` where classes was created in the component
+ constructor.
+* **[ngStyle]** - (attribute directive) - Syntax:
+`<span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>`
+* **\*ngIf** - (structural directive) - only show element when the
+ condition holds true. Syntax: `<p *ngIf="">only shown if true</p>`
+* **\*ngFor** - (structural directive) - loop through list outputting
+ html for each. Syntax: `<li *ngFor="let ninja of ninjas"></li>`
+* **pipes** - reformat output - Syntax:
+```<h3>{ { ninja.name | uppercase } }</h3>```
+* **servie** - makes some functionality available throughout the app.
+Example: databasse connection
 
+### Firebase
+Signup, grab the connect info, put it in index.html at the top level of
+the app. Then you can do things like this to get and post data:
+
+``` typescript
+  fbGetData() {
+    firebase.database().ref('/').on('child_added',
+      (snapshot) => this.ninjas.push(snapshot.val())
+    )
+  }
+  fbPostData(name, belt) {
+    firebase.database().ref('/').push({name: name, belt: belt});
+  }
+
+```
+
+list to display ninjas:
+
+```
+<ul id="ninja-listing">
+  <li *ngFor="let ninja of ninjas | filter:term">
+    <div class="single-ninja">
+      <span [ngStyle]="{background: ninja.belt}">{{ninja.belt}} belt</span>
+      <h3>{ {ninja.name} }</h3> // note the double { should be together
+     </div>                     // for some reason it wouldn't print properly
+  </li>
+</ul>
+```
+
+form to add ninja:
+
+```
+<form id="add-ninja">
+  <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" />
+  <input type="text" [(ngModel)]="belt" [ngModelOptions]="{standalone: true}" />
+  <button (click)="fbPostData(name, belt)">Add Ninja</button>
+</form>
+```
 ### Study materials
+
 
 * [The Net Ninja Angular 2 Playlist](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jqhk5RvBiEwHMKSUXPyng0) - currently watching
 * [Assets Repository](https://github.com/iamshaunjp/angular-2-playlist)
