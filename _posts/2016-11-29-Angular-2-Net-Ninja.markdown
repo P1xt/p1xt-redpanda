@@ -7,6 +7,10 @@ categories: Angular2 SPA
 
 #### The following are my notes from when I watched The Net Ninja's Angular 2 Playlist on Youtube.
 
+[[Repository of final code](https://github.com/P1xt/ng2-demo-netninja)]
+
+[[Live demo](http://p1xt-ng2ninja.surge.sh/)]
+
 Component based! Navbar is a component, Sidebar too, everything. The 
 application starts with a root component, which contains other
 components, which in turn contain other components. So, for instance, 
