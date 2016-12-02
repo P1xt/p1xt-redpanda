@@ -193,7 +193,7 @@ used RouterOutlet instead.
  html for each. Syntax: `<li *ngFor="let ninja of ninjas"></li>`
 * **pipes** - reformat output - Syntax:
 ```<h3>{ { ninja.name | uppercase } }</h3>```
-* **servie** - makes some functionality available throughout the app.
+* **service** - makes some functionality available throughout the app.
 Example: databasse connection
 
 ### Firebase
@@ -237,5 +237,5 @@ form to add ninja:
 ### Study materials
 
 
-* [The Net Ninja Angular 2 Playlist](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jqhk5RvBiEwHMKSUXPyng0) - currently watching
+* [The Net Ninja Angular 2 Playlist](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jqhk5RvBiEwHMKSUXPyng0)
 * [Assets Repository](https://github.com/iamshaunjp/angular-2-playlist)
